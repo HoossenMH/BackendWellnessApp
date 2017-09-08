@@ -1,12 +1,16 @@
 package WellnessApp.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
  * Created by Hasan on 8/13/2017.
  */
-public class User implements Serializable {
+@Entity
+public class User implements Serializable, Comparable<User> {
 
+    @Id
     private String id;
     private String firstname;
     private String lastname;
@@ -71,6 +75,11 @@ public class User implements Serializable {
     }
 
     @Override
+    public int compareTo(User user) {
+        return id.compareTo(user.id);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -83,6 +92,16 @@ public class User implements Serializable {
     @Override
     public int hashCode() {
         return id.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", age='" + age + '\'' +
+                '}';
     }
 }
 

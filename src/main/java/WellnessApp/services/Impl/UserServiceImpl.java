@@ -4,12 +4,16 @@ import WellnessApp.domain.User;
 import WellnessApp.repositories.Impl.UserRepositoryImpl;
 import WellnessApp.repositories.UserRepository;
 import WellnessApp.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by Hasan on 8/13/2017.
  */
+@Component
 public class UserServiceImpl implements UserService {
 
+    @Autowired
     private static UserServiceImpl service = null;
 
     UserRepository repository = UserRepositoryImpl.getInstance();

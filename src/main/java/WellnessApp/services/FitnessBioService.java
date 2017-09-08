@@ -13,4 +13,6 @@ public interface FitnessBioService {
     FitnessBio update(FitnessBio fitnessBio);
 
     void delete(String id);
+
+    FitnessBio readById(String id);
 }

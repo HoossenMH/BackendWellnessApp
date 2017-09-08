@@ -1,13 +1,17 @@
 package WellnessApp.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Hasan on 8/13/2017.
  */
-public class WeightLossExercise implements Serializable{
+@Entity
+public class WeightLossExercise implements Serializable, Comparable<WeightLossExercise> {
 
+    @Id
     private String id;
     private String weightLossExercise_Name;
     private int weightLossExercise_Amount;
@@ -82,6 +86,11 @@ public class WeightLossExercise implements Serializable{
     }
 
     @Override
+    public int compareTo(WeightLossExercise weightLossExercise) {
+        return id.compareTo(weightLossExercise.id);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -94,5 +103,16 @@ public class WeightLossExercise implements Serializable{
     @Override
     public int hashCode() {
         return id.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "WeightLossExercise{" +
+                "id='" + id + '\'' +
+                ", weightLossExercise_Name='" + weightLossExercise_Name + '\'' +
+                ", weightLossExercise_Amount='" + weightLossExercise_Amount + '\'' +
+                ", weightLossExercise_Reps='" + weightLossExercise_Reps + '\'' +
+                ", weightLossExercise_Date='" + weightLossExercise_Date + '\'' +
+                '}';
     }
 }

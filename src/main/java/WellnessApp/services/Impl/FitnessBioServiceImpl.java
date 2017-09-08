@@ -4,14 +4,19 @@ import WellnessApp.domain.FitnessBio;
 import WellnessApp.repositories.FitnessBioRepository;
 import WellnessApp.repositories.Impl.FitnessBioRepositoryImpl;
 import WellnessApp.services.FitnessBioService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by Hasan on 8/13/2017.
  */
+@Component
 public class FitnessBioServiceImpl implements FitnessBioService {
 
+    @Autowired
     private static FitnessBioServiceImpl service = null;
 
+    @Autowired
     FitnessBioRepository repository = FitnessBioRepositoryImpl.getInstance();
 
     public static FitnessBioServiceImpl getInstance(){
@@ -35,5 +40,9 @@ public class FitnessBioServiceImpl implements FitnessBioService {
     public void delete(String id) {
         repository.delete(id);
 
+    }
+    @Override
+    public FitnessBio findById(String s) {
+        return repository.findOne(s);
     }
 }

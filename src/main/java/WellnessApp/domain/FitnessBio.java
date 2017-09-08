@@ -1,11 +1,16 @@
 package WellnessApp.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
  * Created by Hasan on 8/13/2017.
  */
-public class FitnessBio implements Serializable {
+@Entity
+public class FitnessBio implements Serializable, Comparable<FitnessBio>  {
+
+    @Id
     private String id;
     private String reasons;
     private double weight;
@@ -86,9 +91,24 @@ public class FitnessBio implements Serializable {
             return this;
         }
 
+        public Builder copy(FitnessBio fitnessBio) {
+            this.id = fitnessBio.id;
+            this.reasons = fitnessBio.reasons;
+            this.weight = fitnessBio.weight;
+            this.height = fitnessBio.height;
+            this.BMI = fitnessBio.BMI;
+            this.bloodPressure = fitnessBio.bloodPressure;
+            return  this;
+        }
+
         public FitnessBio build(){
             return new FitnessBio(this);
         }
+    }
+
+    @Override
+    public int compareTo(FitnessBio fitnessBio) {
+        return id.compareTo(fitnessBio.id);
     }
 
     @Override
@@ -104,5 +124,17 @@ public class FitnessBio implements Serializable {
     @Override
     public int hashCode() {
         return id.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "FitnessBio{" +
+                "id='" + id + '\'' +
+                ", reasons='" + reasons + '\'' +
+                ", weight='" + weight + '\'' +
+                ", height='" + height + '\'' +
+                ", BMI='" + BMI + '\'' +
+                ", bloodPressure='" + bloodPressure + '\'' +
+                '}';
     }
 }

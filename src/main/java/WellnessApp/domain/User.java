@@ -67,7 +67,13 @@ public class User implements Serializable, Comparable<User> {
             this.age = value;
             return this;
         }
-
+        public Builder copy(User user) {
+            this.age = user.age;
+            this.id = user.id;
+            this.firstname = user.firstname;
+            this.lastname = user.lastname;
+            return this;
+        }
         public User build(){
             return new User(this);
         }

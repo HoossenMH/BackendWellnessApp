@@ -9,8 +9,8 @@ import java.util.Map;
 /**
  * Created by Hasan on 8/13/2017.
  */
-public class SignUpRepositoryImpl implements SignUpRepository {
-
+public class SignUpRepositoryImpl //implements SignUpRepository {
+{
     private static SignUpRepositoryImpl respository = null;
 
     private Map<String,SignUp> signUpTable;

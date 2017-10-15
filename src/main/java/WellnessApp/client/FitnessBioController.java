@@ -43,15 +43,15 @@ public class FitnessBioController {
     }
 
 
-    //-------------------Retrieve All Stories--------------------------------------------------------
+    //-------------------Retrieve All FitnessBio--------------------------------------------------------
 
-    @RequestMapping(value = "/stories/", method = RequestMethod.GET)
-    public ResponseEntity<Set<FitnessBio>> getStories() {
-        Set<FitnessBio> stories = fitnessBioService.readAll();
-        if(stories.isEmpty()){
+    @RequestMapping(value = "/fitnessBio/AllFitnessBio", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<FitnessBio>> getFitnessBio() {
+        Set<FitnessBio> fitnessBios = fitnessBioService.readAll();
+        if(fitnessBios.isEmpty()){
             return new ResponseEntity<Set<FitnessBio>>(HttpStatus.NO_CONTENT);// OR HttpStatus.NOT_FOUND
         }
-        return new ResponseEntity<Set<FitnessBio>>(stories, HttpStatus.OK);
+        return new ResponseEntity<Set<FitnessBio>>(fitnessBios, HttpStatus.OK);
     }
 
     //------------------- Update a FitnessBio --------------------------------------------------------
@@ -77,14 +77,13 @@ public class FitnessBioController {
 
     //------------------- Delete a FitnessBio --------------------------------------------------------
 
-    @RequestMapping(value = "/fitnessBio/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/fitnessBio/delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<FitnessBio> deleteFitnessBio(@PathVariable("id") String id) {
         FitnessBio fitnessBio = fitnessBioService.readById(id);
         if (fitnessBio == null) {
             return new ResponseEntity<FitnessBio>(HttpStatus.NOT_FOUND);
         }
-        fitnessBioService.delete(id);
+        fitnessBioService.delete(fitnessBio);
         return new ResponseEntity<FitnessBio>(HttpStatus.NO_CONTENT);
     }
-
 }

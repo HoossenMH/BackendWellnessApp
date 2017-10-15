@@ -7,6 +7,9 @@ import WellnessApp.services.UserExperienceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by Hasan on 8/13/2017.
  */
@@ -14,30 +17,27 @@ import org.springframework.stereotype.Component;
 public class UserExperienceServiceImpl implements UserExperienceService {
 
     @Autowired
-    private static UserExperienceServiceImpl service = null;
-
-    UserExperienceRepository repository = UserExperienceRepositoryImpl.getInstance();
-
-    public static UserExperienceServiceImpl getInstance(){
-        if(service == null)
-            service = new UserExperienceServiceImpl();
-        return service;
-    }
-
+    private UserExperienceRepository userExperienceRepository;
+    @Override
     public UserExperience create(UserExperience userExperience) {
-        return repository.create(userExperience);
+        return userExperienceRepository.save(userExperience);
     }
-
-    public UserExperience read(String id) {
-        return repository.read(id);
+    @Override
+    public UserExperience readById(String id) {
+        return userExperienceRepository.findOne(id);
     }
-
+    @Override
+    public Set<UserExperience> readAll() {
+        Set<UserExperience> result = new HashSet<UserExperience>();
+        while (userExperienceRepository.findAll().iterator().hasNext()) {
+            result.add(userExperienceRepository.findAll().iterator().next());
+        }
+        return result;
+    }
+    @Override
     public UserExperience update(UserExperience userExperience) {
-        return repository.update(userExperience);
+        return userExperienceRepository.save(userExperience);
     }
-
-    public void delete(String id) {
-        repository.delete(id);
-
-    }
+    @Override
+    public void delete(UserExperience id) { userExperienceRepository.delete(id); }
 }

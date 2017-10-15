@@ -80,6 +80,14 @@ public class WeightLossExercise implements Serializable, Comparable<WeightLossEx
             this.weightLossExercise_Date = weightLossExercise_Date;
             return this;
         }
+        public Builder copy(WeightLossExercise weightLossExercise) {
+            this.id = weightLossExercise.id;
+            this.weightLossExercise_Name = weightLossExercise.weightLossExercise_Name;
+            this.weightLossExercise_Amount = weightLossExercise.weightLossExercise_Amount;
+            this.weightLossExercise_Reps = weightLossExercise.weightLossExercise_Reps;
+            this.weightLossExercise_Date = weightLossExercise.weightLossExercise_Date;
+            return this;
+        }
         public WeightLossExercise build(){
             return new WeightLossExercise(this);
         }

@@ -9,7 +9,8 @@ import java.util.Map;
 /**
  * Created by Hasan on 8/13/2017.
  */
-public class WeightLossExerciseRepositoryImpl implements WeightLossExerciseRepository {
+public class WeightLossExerciseRepositoryImpl //implements WeightLossExerciseRepository
+{
 
     private static WeightLossExerciseRepositoryImpl respository = null;
 

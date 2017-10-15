@@ -42,6 +42,11 @@ public class UserExperience implements Serializable, Comparable<UserExperience> 
             this.comments = comments;
             return this;
         }
+        public Builder copy(UserExperience userExperience) {
+            this.id = userExperience.id;
+            this.comments = userExperience.comments;
+            return this;
+        }
         public UserExperience build(){
             return new UserExperience(this);
         }

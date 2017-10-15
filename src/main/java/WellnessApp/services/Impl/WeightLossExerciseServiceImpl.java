@@ -7,6 +7,9 @@ import WellnessApp.services.WeightLossExerciseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by Hasan on 8/13/2017.
  */
@@ -14,30 +17,27 @@ import org.springframework.stereotype.Component;
 public class WeightLossExerciseServiceImpl implements WeightLossExerciseService {
 
     @Autowired
-    private static WeightLossExerciseServiceImpl service = null;
-
-    WeightLossExerciseRepository repository = WeightLossExerciseRepositoryImpl.getInstance();
-
-    public static WeightLossExerciseServiceImpl getInstance(){
-        if(service == null)
-            service = new WeightLossExerciseServiceImpl();
-        return service;
+    private  WeightLossExerciseRepository weightLossExerciseRepository;
+    @Override
+    public  WeightLossExercise create( WeightLossExercise weightLossExercise) {
+        return weightLossExerciseRepository.save(weightLossExercise);
     }
-
-    public WeightLossExercise create(WeightLossExercise weightLossExercise) {
-        return repository.create(weightLossExercise);
+    @Override
+    public  WeightLossExercise readById(String id) {
+        return weightLossExerciseRepository.findOne(id);
     }
-
-    public WeightLossExercise read(String id) {
-        return repository.read(id);
+    @Override
+    public Set< WeightLossExercise> readAll() {
+        Set< WeightLossExercise> result = new HashSet< WeightLossExercise>();
+        while (weightLossExerciseRepository.findAll().iterator().hasNext()) {
+            result.add(weightLossExerciseRepository.findAll().iterator().next());
+        }
+        return result;
     }
-
-    public WeightLossExercise update(WeightLossExercise weightLossExercise) {
-        return repository.update(weightLossExercise);
+    @Override
+    public  WeightLossExercise update( WeightLossExercise weightLossExercise) {
+        return weightLossExerciseRepository.save(weightLossExercise);
     }
-
-    public void delete(String id) {
-        repository.delete(id);
-
-    }
+    @Override
+    public void delete( WeightLossExercise id) { weightLossExerciseRepository.delete(id); }
 }

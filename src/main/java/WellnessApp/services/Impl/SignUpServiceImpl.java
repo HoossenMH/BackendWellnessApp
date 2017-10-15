@@ -7,6 +7,9 @@ import WellnessApp.services.SignUpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by Hasan on 8/13/2017.
  */
@@ -14,30 +17,27 @@ import org.springframework.stereotype.Component;
 public class SignUpServiceImpl implements SignUpService {
 
     @Autowired
-    private static SignUpServiceImpl service = null;
-
-    SignUpRepository repository = SignUpRepositoryImpl.getInstance();
-
-    public static SignUpServiceImpl getInstance(){
-        if(service == null)
-            service = new SignUpServiceImpl();
-        return service;
-    }
-
+    private SignUpRepository signUpRepository;
+    @Override
     public SignUp create(SignUp signUp) {
-        return repository.create(signUp);
+        return signUpRepository.save(signUp);
     }
-
-    public SignUp read(String id) {
-        return repository.read(id);
+    @Override
+    public SignUp readById(String id) {
+        return signUpRepository.findOne(id);
     }
-
+    @Override
+    public Set<SignUp> readAll() {
+        Set<SignUp> result = new HashSet<SignUp>();
+        while (signUpRepository.findAll().iterator().hasNext()) {
+            result.add(signUpRepository.findAll().iterator().next());
+        }
+        return result;
+    }
+    @Override
     public SignUp update(SignUp signUp) {
-        return repository.update(signUp);
+        return signUpRepository.save(signUp);
     }
-
-    public void delete(String id) {
-        repository.delete(id);
-
-    }
+    @Override
+    public void delete(SignUp id) { signUpRepository.delete(id); }
 }

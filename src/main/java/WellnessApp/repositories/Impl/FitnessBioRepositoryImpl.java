@@ -9,7 +9,8 @@ import java.util.Map;
 /**
  * Created by Hasan on 8/13/2017.
  */
-public class FitnessBioRepositoryImpl implements FitnessBioRepository {
+public class FitnessBioRepositoryImpl //implements FitnessBioRepository
+{
 
     private static FitnessBioRepositoryImpl respository = null;
 

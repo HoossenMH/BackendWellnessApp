@@ -7,6 +7,9 @@ import WellnessApp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by Hasan on 8/13/2017.
  */
@@ -14,30 +17,27 @@ import org.springframework.stereotype.Component;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private static UserServiceImpl service = null;
-
-    UserRepository repository = UserRepositoryImpl.getInstance();
-
-    public static UserServiceImpl getInstance(){
-        if(service == null)
-            service = new UserServiceImpl();
-        return service;
-    }
-
+    private UserRepository userRepository;
+    @Override
     public User create(User user) {
-        return repository.create(user);
+        return userRepository.save(user);
     }
-
-    public User read(String id) {
-        return repository.read(id);
+    @Override
+    public User readById(String id) {
+        return userRepository.findOne(id);
     }
-
+    @Override
+    public Set<User> readAll() {
+        Set<User> result = new HashSet<User>();
+        while (userRepository.findAll().iterator().hasNext()) {
+            result.add(userRepository.findAll().iterator().next());
+        }
+        return result;
+    }
+    @Override
     public User update(User user) {
-        return repository.update(user);
+        return userRepository.save(user);
     }
-
-    public void delete(String id) {
-        repository.delete(id);
-
-    }
+    @Override
+    public void delete(User id) { userRepository.delete(id); }
 }

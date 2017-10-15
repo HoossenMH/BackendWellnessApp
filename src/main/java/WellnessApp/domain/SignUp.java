@@ -1,6 +1,8 @@
 package WellnessApp.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
@@ -12,6 +14,7 @@ import java.util.Date;
 public class SignUp implements Serializable, Comparable<SignUp>  {
 
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private String id;
     private String username;
     private String password;
@@ -102,6 +105,16 @@ public class SignUp implements Serializable, Comparable<SignUp>  {
 
         public Builder signUp_Date(Date signUp_Date) {
             this.signUp_Date = signUp_Date;
+            return this;
+        }
+        public Builder copy(SignUp signUp) {
+            this.id = signUp.id;
+            this.username = signUp.username;
+            this.password = signUp.password;
+            this.email = signUp.email;
+            this.gender = signUp.gender;
+            this.dob = signUp.dob;
+            this.signUp_Date = signUp .signUp_Date;
             return this;
         }
 

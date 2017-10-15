@@ -9,7 +9,8 @@ import java.util.Map;
 /**
  * Created by Hasan on 8/13/2017.
  */
-public class UserRepositoryImpl implements UserRepository {
+public class UserRepositoryImpl //implements UserRepository
+{
 
     private static UserRepositoryImpl respository = null;
 

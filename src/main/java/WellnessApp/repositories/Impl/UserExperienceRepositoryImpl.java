@@ -9,8 +9,8 @@ import java.util.Map;
 /**
  * Created by Hasan on 8/13/2017.
  */
-public class UserExperienceRepositoryImpl implements UserExperienceRepository {
-
+public class UserExperienceRepositoryImpl// implements UserExperienceRepository
+{
     private static UserExperienceRepositoryImpl respository = null;
 
     private Map<String,UserExperience> userExperienceTable;

@@ -5,11 +5,15 @@ package WellnessApp;
  */
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @EnableAutoConfiguration
+@Configuration
+@ComponentScan
 @SpringBootApplication
 public class Example {
 

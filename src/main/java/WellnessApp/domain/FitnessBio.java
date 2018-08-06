@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class FitnessBio implements Serializable, Comparable<FitnessBio>  {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    //@GeneratedValue(strategy= GenerationType.AUTO)
     private String id;
     private String reasons;
     private double weight;

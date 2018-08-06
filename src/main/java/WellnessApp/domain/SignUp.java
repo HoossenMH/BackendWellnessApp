@@ -14,7 +14,6 @@ import java.util.Date;
 public class SignUp implements Serializable, Comparable<SignUp>  {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
     private String id;
     private String username;
     private String password;

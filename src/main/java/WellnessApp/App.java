@@ -10,9 +10,6 @@ import org.springframework.context.annotation.Configuration;
  * Hello world!
  *
  */
-@Configuration
-@EnableAutoConfiguration
-@ComponentScan
 @SpringBootApplication
 public class App 
 {

@@ -32,7 +32,14 @@ public class User implements Serializable, Comparable<User> {
         return age;
     }
 
-    private User() {
+    public User() {
+    }
+
+    public User(String id, String firstname, String lastname, int age) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.age = age;
     }
 
     public User(Builder builder) {

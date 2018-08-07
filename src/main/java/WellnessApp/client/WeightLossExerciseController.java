@@ -7,10 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Set;
@@ -18,6 +15,8 @@ import java.util.Set;
 /**
  * Created by Hasan on 10/15/2017.
  */
+@RestController
+@RequestMapping("/weightLossExercises")
 public class WeightLossExerciseController {
 
     // Inject Service
@@ -26,11 +25,11 @@ public class WeightLossExerciseController {
 
     //-------------------Create a WeightLossExercise--------------------------------------------------------
 
-    @RequestMapping(value = "/weightLossExercise/", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createWeightLossExercise(@RequestBody WeightLossExercise weightLossExercise, UriComponentsBuilder ucBuilder) {
         weightLossExerciseService.create(weightLossExercise);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/weightLossExercise/{id}").buildAndExpand(weightLossExercise.getId()).toUri());
+        headers.setLocation(ucBuilder.path("/weightLossExercises/weightLossExercise/{id}").buildAndExpand(weightLossExercise.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
@@ -78,7 +77,7 @@ public class WeightLossExerciseController {
 
     //------------------- Delete a WeightLossExercise --------------------------------------------------------
 
-    @RequestMapping(value = "/weightLossExercise/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/weightLossExercise/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<WeightLossExercise> deleteWeightLossExercise(@PathVariable("id") String id) {
         WeightLossExercise weightLossExercise = weightLossExerciseService.readById(id);
         if (weightLossExercise == null) {

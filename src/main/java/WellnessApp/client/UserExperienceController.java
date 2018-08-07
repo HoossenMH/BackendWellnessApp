@@ -16,6 +16,7 @@ import java.util.Set;
  * Created by Hasan on 10/15/2017.
  */
 @RestController
+@RequestMapping("/userExperiences")
 public class UserExperienceController {
 
 
@@ -25,11 +26,11 @@ public class UserExperienceController {
 
     //-------------------Create a UserExperience--------------------------------------------------------
 
-    @RequestMapping(value = "/userExperience/", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createUserExperience(@RequestBody UserExperience userExperience, UriComponentsBuilder ucBuilder) {
         userExperienceService.create(userExperience);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/userExperience/{id}").buildAndExpand(userExperience.getId()).toUri());
+        headers.setLocation(ucBuilder.path("/userExperiences/userExperience/{id}").buildAndExpand(userExperience.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
@@ -74,7 +75,7 @@ public class UserExperienceController {
 
     //------------------- Delete a UserExperience --------------------------------------------------------
 
-    @RequestMapping(value = "/userExperience/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/userExperience/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<UserExperience> deleteUserExperience(@PathVariable("id") String id) {
         UserExperience userExperience = userExperienceService.readById(id);
         if (userExperience == null) {

@@ -16,6 +16,7 @@ import java.util.Set;
  * Created by Hasan on 9/25/2017.
  */
 @RestController
+@RequestMapping("/signUps")
 public class SignUpController {
 
     // Inject Service
@@ -24,11 +25,11 @@ public class SignUpController {
 
     //-------------------Create a SignUp--------------------------------------------------------
 
-    @RequestMapping(value = "/signUp/", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createSignUp(@RequestBody SignUp signUp, UriComponentsBuilder ucBuilder) {
         signUpService.create(signUp);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/signUp/{id}").buildAndExpand(signUp.getId()).toUri());
+        headers.setLocation(ucBuilder.path("/signUps/signUp/{id}").buildAndExpand(signUp.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
@@ -78,7 +79,7 @@ public class SignUpController {
 
     //------------------- Delete a SignUp --------------------------------------------------------
 
-    @RequestMapping(value = "/signUp/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/signUp/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<SignUp> deleteSignUp(@PathVariable("id") String id) {
         SignUp signUp = signUpService.readById(id);
         if (signUp == null) {

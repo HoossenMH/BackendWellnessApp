@@ -16,6 +16,7 @@ import java.util.Set;
  * Created by Hasan on 9/6/2017.
  */
 @RestController
+@RequestMapping("/fitnessBios")
 public class FitnessBioController {
 
     // Inject Service
@@ -24,11 +25,11 @@ public class FitnessBioController {
 
     //-------------------Create a FitnessBio--------------------------------------------------------
 
-    @RequestMapping(value = "/fitnessBio/", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createFitnessBio(@RequestBody FitnessBio fitnessBio, UriComponentsBuilder ucBuilder) {
         fitnessBioService.create(fitnessBio);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/fitnessBio/{id}").buildAndExpand(fitnessBio.getId()).toUri());
+        headers.setLocation(ucBuilder.path("/fitnessBios/fitnessBio/{id}").buildAndExpand(fitnessBio.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
@@ -77,7 +78,7 @@ public class FitnessBioController {
 
     //------------------- Delete a FitnessBio --------------------------------------------------------
 
-    @RequestMapping(value = "/fitnessBio/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/fitnessBio/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<FitnessBio> deleteFitnessBio(@PathVariable("id") String id) {
         FitnessBio fitnessBio = fitnessBioService.readById(id);
         if (fitnessBio == null) {

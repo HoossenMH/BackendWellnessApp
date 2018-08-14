@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -26,11 +27,11 @@ public class SignUpController {
     //-------------------Create a SignUp--------------------------------------------------------
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createSignUp(@RequestBody SignUp signUp, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<SignUp> createSignUp(@RequestBody SignUp signUp, UriComponentsBuilder ucBuilder) {
         signUpService.create(signUp);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/signUps/signUp/{id}").buildAndExpand(signUp.getId()).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<SignUp>(headers, HttpStatus.CREATED);
     }
 
     //-------------------Retrieve Single SignUp--------------------------------------------------------
@@ -47,12 +48,12 @@ public class SignUpController {
     //-------------------Retrieve All SignUp--------------------------------------------------------
 
     @RequestMapping(value = "/signUp/AllSignUp", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Set<SignUp>> getSignUp() {
-        Set<SignUp> signUps = signUpService.readAll();
-        if(signUps.isEmpty()){
-            return new ResponseEntity<Set<SignUp>>(HttpStatus.NO_CONTENT);// OR HttpStatus.NOT_FOUND
+    public ResponseEntity<Iterable<SignUp>> getSignUp() {
+        Iterable<SignUp> signUps = signUpService.readAllList();
+        if(!signUps.iterator().hasNext()){
+            return new ResponseEntity<Iterable<SignUp>>(HttpStatus.NO_CONTENT);// OR HttpStatus.NOT_FOUND
         }
-        return new ResponseEntity<Set<SignUp>>(signUps, HttpStatus.OK);
+        return new ResponseEntity<Iterable<SignUp>>(signUps, HttpStatus.OK);
     }
 
     //------------------- Update a SignUp --------------------------------------------------------

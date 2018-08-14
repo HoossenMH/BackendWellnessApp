@@ -1,5 +1,6 @@
 package WellnessApp.services;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -11,6 +12,8 @@ public interface BaseService<E, ID> {
     E readById(ID id);
 
     Set<E> readAll();
+
+    Iterable<E> readAllList();
 
     E update(E entity);
 

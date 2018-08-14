@@ -7,7 +7,9 @@ import WellnessApp.services.UserExperienceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -33,6 +35,14 @@ public class UserExperienceServiceImpl implements UserExperienceService {
             result.add(userExperienceRepository.findAll().iterator().next());
         }
         return result;
+    }
+    @Override
+    public Iterable<UserExperience> readAllList() {
+//        List<UserExperience> result = new ArrayList<UserExperience>();
+//        while (userExperienceRepository.findAll().iterator().hasNext()) {
+//            result.add(userExperienceRepository.findAll().iterator().next());
+//        }
+        return userExperienceRepository.findAll();
     }
     @Override
     public UserExperience update(UserExperience userExperience) {

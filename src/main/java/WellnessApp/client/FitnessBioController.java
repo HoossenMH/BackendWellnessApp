@@ -26,11 +26,11 @@ public class FitnessBioController {
     //-------------------Create a FitnessBio--------------------------------------------------------
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createFitnessBio(@RequestBody FitnessBio fitnessBio, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<FitnessBio> createFitnessBio(@RequestBody FitnessBio fitnessBio, UriComponentsBuilder ucBuilder) {
         fitnessBioService.create(fitnessBio);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/fitnessBios/fitnessBio/{id}").buildAndExpand(fitnessBio.getId()).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<FitnessBio>(headers, HttpStatus.CREATED);
     }
 
     //-------------------Retrieve Single FitnessBio--------------------------------------------------------
@@ -47,12 +47,12 @@ public class FitnessBioController {
     //-------------------Retrieve All FitnessBio--------------------------------------------------------
 
     @RequestMapping(value = "/fitnessBio/AllFitnessBio", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Set<FitnessBio>> getFitnessBio() {
-        Set<FitnessBio> fitnessBios = fitnessBioService.readAll();
-        if(fitnessBios.isEmpty()){
-            return new ResponseEntity<Set<FitnessBio>>(HttpStatus.NO_CONTENT);// OR HttpStatus.NOT_FOUND
+    public ResponseEntity<Iterable<FitnessBio>> getFitnessBio() {
+        Iterable<FitnessBio> fitnessBios = fitnessBioService.readAll();
+        if(!fitnessBios.iterator().hasNext()){
+            return new ResponseEntity<Iterable<FitnessBio>>(HttpStatus.NO_CONTENT);// OR HttpStatus.NOT_FOUND
         }
-        return new ResponseEntity<Set<FitnessBio>>(fitnessBios, HttpStatus.OK);
+        return new ResponseEntity<Iterable<FitnessBio>>(fitnessBios, HttpStatus.OK);
     }
 
     //------------------- Update a FitnessBio --------------------------------------------------------

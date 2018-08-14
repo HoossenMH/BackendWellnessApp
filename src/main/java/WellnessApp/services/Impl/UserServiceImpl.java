@@ -7,7 +7,9 @@ import WellnessApp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -33,6 +35,14 @@ public class UserServiceImpl implements UserService {
             result.add(userRepository.findAll().iterator().next());
         }
         return result;
+    }
+    @Override
+    public Iterable<User> readAllList() {
+//        List<User> result = new ArrayList<User>();
+//        while (userRepository.findAll().iterator().hasNext()) {
+//            result.add(userRepository.findAll().iterator().next());
+//        }
+        return userRepository.findAll();
     }
     @Override
     public User update(User user) {

@@ -33,11 +33,11 @@ public class UserController {
 //    //-------------------Create a User--------------------------------------------------------
 //
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createUser(@RequestBody User user, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<User> createUser(@RequestBody User user, UriComponentsBuilder ucBuilder) {
         userService.create(user);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/users/user/{id}").buildAndExpand(user.getId()).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<User>(headers, HttpStatus.CREATED);
     }
 //
 //    //-------------------Retrieve Single User--------------------------------------------------------
@@ -54,12 +54,12 @@ public class UserController {
 //    //-------------------Retrieve All User--------------------------------------------------------
 //
     @RequestMapping(value = "/user/AllUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Set<User>> getUser() {
-        Set<User> users = userService.readAll();
-        if(users.isEmpty()){
-            return new ResponseEntity<Set<User>>(HttpStatus.NO_CONTENT);// OR HttpStatus.NOT_FOUND
+    public ResponseEntity<Iterable<User>> getUser() {
+        Iterable<User> users = userService.readAll();
+        if(!users.iterator().hasNext()){
+            return new ResponseEntity<Iterable<User>>(HttpStatus.NO_CONTENT);// OR HttpStatus.NOT_FOUND
         }
-        return new ResponseEntity<Set<User>>(users, HttpStatus.OK);
+        return new ResponseEntity<Iterable<User>>(users, HttpStatus.OK);
     }
 //
 //    //------------------- Update a User --------------------------------------------------------

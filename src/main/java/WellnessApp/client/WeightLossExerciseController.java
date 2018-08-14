@@ -26,11 +26,11 @@ public class WeightLossExerciseController {
     //-------------------Create a WeightLossExercise--------------------------------------------------------
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createWeightLossExercise(@RequestBody WeightLossExercise weightLossExercise, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<WeightLossExercise> createWeightLossExercise(@RequestBody WeightLossExercise weightLossExercise, UriComponentsBuilder ucBuilder) {
         weightLossExerciseService.create(weightLossExercise);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/weightLossExercises/weightLossExercise/{id}").buildAndExpand(weightLossExercise.getId()).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<WeightLossExercise>(headers, HttpStatus.CREATED);
     }
 
     //-------------------Retrieve Single WeightLossExercise--------------------------------------------------------
@@ -47,12 +47,12 @@ public class WeightLossExerciseController {
     //-------------------Retrieve All WeightLossExercise--------------------------------------------------------
 
     @RequestMapping(value = "/weightLossExercise/AllWeightLossExercise", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Set<WeightLossExercise>> getWeightLossExercise() {
-        Set<WeightLossExercise> weightLossExercises = weightLossExerciseService.readAll();
-        if(weightLossExercises.isEmpty()){
-            return new ResponseEntity<Set<WeightLossExercise>>(HttpStatus.NO_CONTENT);// OR HttpStatus.NOT_FOUND
+    public ResponseEntity<Iterable<WeightLossExercise>> getWeightLossExercise() {
+        Iterable<WeightLossExercise> weightLossExercises = weightLossExerciseService.readAll();
+        if(!weightLossExercises.iterator().hasNext()){
+            return new ResponseEntity<Iterable<WeightLossExercise>>(HttpStatus.NO_CONTENT);// OR HttpStatus.NOT_FOUND
         }
-        return new ResponseEntity<Set<WeightLossExercise>>(weightLossExercises, HttpStatus.OK);
+        return new ResponseEntity<Iterable<WeightLossExercise>>(weightLossExercises, HttpStatus.OK);
     }
 
     //------------------- Update a WeightLossExercise --------------------------------------------------------

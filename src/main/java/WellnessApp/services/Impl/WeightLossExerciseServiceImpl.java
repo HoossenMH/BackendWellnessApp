@@ -7,7 +7,9 @@ import WellnessApp.services.WeightLossExerciseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -33,6 +35,14 @@ public class WeightLossExerciseServiceImpl implements WeightLossExerciseService 
             result.add(weightLossExerciseRepository.findAll().iterator().next());
         }
         return result;
+    }
+    @Override
+    public Iterable<WeightLossExercise> readAllList() {
+//        List<WeightLossExercise> result = new ArrayList<WeightLossExercise>();
+//        while (weightLossExerciseRepository.findAll().iterator().hasNext()) {
+//            result.add(weightLossExerciseRepository.findAll().iterator().next());
+//        }
+        return weightLossExerciseRepository.findAll();
     }
     @Override
     public  WeightLossExercise update( WeightLossExercise weightLossExercise) {

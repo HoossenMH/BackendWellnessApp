@@ -7,7 +7,9 @@ import WellnessApp.services.FitnessBioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -33,6 +35,14 @@ public class FitnessBioServiceImpl implements FitnessBioService {
             result.add(fitnessBioRepository.findAll().iterator().next());
         }
         return result;
+    }
+    @Override
+    public Iterable<FitnessBio> readAllList() {
+//        List<FitnessBio> result = new ArrayList<FitnessBio>();
+//        while (fitnessBioRepository.findAll().iterator().hasNext()) {
+//            result.add(fitnessBioRepository.findAll().iterator().next());
+//        }
+        return fitnessBioRepository.findAll();
     }
     @Override
     public FitnessBio update(FitnessBio fitnessBio) {

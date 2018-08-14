@@ -27,11 +27,11 @@ public class UserExperienceController {
     //-------------------Create a UserExperience--------------------------------------------------------
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createUserExperience(@RequestBody UserExperience userExperience, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<UserExperience> createUserExperience(@RequestBody UserExperience userExperience, UriComponentsBuilder ucBuilder) {
         userExperienceService.create(userExperience);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/userExperiences/userExperience/{id}").buildAndExpand(userExperience.getId()).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<UserExperience>(headers, HttpStatus.CREATED);
     }
 
     //-------------------Retrieve Single UserExperience--------------------------------------------------------
@@ -48,12 +48,12 @@ public class UserExperienceController {
     //-------------------Retrieve All UserExperience--------------------------------------------------------
 
     @RequestMapping(value = "/userExperience/AllUserExperience", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Set<UserExperience>> getUserExperience() {
-        Set<UserExperience> userExperiences = userExperienceService.readAll();
-        if(userExperiences.isEmpty()){
-            return new ResponseEntity<Set<UserExperience>>(HttpStatus.NO_CONTENT);// OR HttpStatus.NOT_FOUND
+    public ResponseEntity<Iterable<UserExperience>> getUserExperience() {
+        Iterable<UserExperience> userExperiences = userExperienceService.readAll();
+        if(!userExperiences.iterator().hasNext()){
+            return new ResponseEntity<Iterable<UserExperience>>(HttpStatus.NO_CONTENT);// OR HttpStatus.NOT_FOUND
         }
-        return new ResponseEntity<Set<UserExperience>>(userExperiences, HttpStatus.OK);
+        return new ResponseEntity<Iterable<UserExperience>>(userExperiences, HttpStatus.OK);
     }
 
     //------------------- Update a UserExperience --------------------------------------------------------

@@ -7,7 +7,9 @@ import WellnessApp.services.SignUpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -33,6 +35,14 @@ public class SignUpServiceImpl implements SignUpService {
             result.add(signUpRepository.findAll().iterator().next());
         }
         return result;
+    }
+    @Override
+    public Iterable<SignUp> readAllList() {
+//        List<SignUp> result = new ArrayList<SignUp>();
+//        while (signUpRepository.findAll().iterator().hasNext()) {
+//            result.add(signUpRepository.findAll().iterator().next());
+//        }
+        return  signUpRepository.findAll();
     }
     @Override
     public SignUp update(SignUp signUp) {

@@ -20,27 +20,23 @@ import java.util.Set;
 @RequestMapping("/users")
 public class UserController {
 
-//    @RequestMapping(value = "/{age}", method = RequestMethod.GET)
-//    public User getUserByAge(@PathVariable("age") int age)
-//    {
-//        User user = new User("001", "Hasan", "Hoossen", age);
-//        return user;
-//    }
     // Inject Service
     @Autowired
     private UserService userService;
-//
 //    //-------------------Create a User--------------------------------------------------------
-//
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+
+    @CrossOrigin(origins = "http://localhost:53830")
+    @RequestMapping(value = "/AddUser",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> createUser(@RequestBody User user, UriComponentsBuilder ucBuilder) {
         userService.create(user);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/users/user/{id}").buildAndExpand(user.getId()).toUri());
         return new ResponseEntity<User>(headers, HttpStatus.CREATED);
     }
-//
+
 //    //-------------------Retrieve Single User--------------------------------------------------------
+
+    @CrossOrigin(origins = "http://localhost:53830")
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> getUser(@PathVariable("id") String id) {
         User user = userService.readById(id);
@@ -52,10 +48,11 @@ public class UserController {
 //
 //
 //    //-------------------Retrieve All User--------------------------------------------------------
-//
+
+    @CrossOrigin(origins = "http://localhost:53830")
     @RequestMapping(value = "/user/AllUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Iterable<User>> getUser() {
-        Iterable<User> users = userService.readAll();
+        Iterable<User> users = userService.readAllList();
         if(!users.iterator().hasNext()){
             return new ResponseEntity<Iterable<User>>(HttpStatus.NO_CONTENT);// OR HttpStatus.NOT_FOUND
         }
@@ -64,6 +61,7 @@ public class UserController {
 //
 //    //------------------- Update a User --------------------------------------------------------
 //
+    @CrossOrigin(origins = "http://localhost:53830")
     @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
     public ResponseEntity<User> updateUser(@PathVariable("id") String id, @RequestBody User user) {
 
@@ -83,6 +81,7 @@ public class UserController {
 //
 //    //------------------- Delete a User --------------------------------------------------------
 //
+    @CrossOrigin(origins = "http://localhost:53830")
     @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<User> deleteUser(@PathVariable("id") String id) {
         User user = userService.readById(id);

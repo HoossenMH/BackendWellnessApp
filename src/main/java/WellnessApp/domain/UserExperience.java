@@ -26,8 +26,8 @@ public class UserExperience implements Serializable, Comparable<UserExperience> 
     }
 
     public UserExperience(Builder builder) {
-        this.id = id;
-        this.comments = comments;
+        this.id = builder.id;
+        this.comments = builder.comments;
     }
     public static class Builder{
         private String id;

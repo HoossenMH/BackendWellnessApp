@@ -26,7 +26,8 @@ public class UserExperienceController {
 
     //-------------------Create a UserExperience--------------------------------------------------------
 
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin(origins = "http://localhost:53830")
+    @RequestMapping(value = "/AddUserExperience",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserExperience> createUserExperience(@RequestBody UserExperience userExperience, UriComponentsBuilder ucBuilder) {
         userExperienceService.create(userExperience);
         HttpHeaders headers = new HttpHeaders();
@@ -35,6 +36,8 @@ public class UserExperienceController {
     }
 
     //-------------------Retrieve Single UserExperience--------------------------------------------------------
+
+    @CrossOrigin(origins = "http://localhost:53830")
     @RequestMapping(value = "/userExperience/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserExperience> getUserExperience(@PathVariable("id") String id) {
         UserExperience userExperience = userExperienceService.readById(id);
@@ -47,9 +50,10 @@ public class UserExperienceController {
 
     //-------------------Retrieve All UserExperience--------------------------------------------------------
 
+    @CrossOrigin(origins = "http://localhost:53830")
     @RequestMapping(value = "/userExperience/AllUserExperience", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Iterable<UserExperience>> getUserExperience() {
-        Iterable<UserExperience> userExperiences = userExperienceService.readAll();
+        Iterable<UserExperience> userExperiences = userExperienceService.readAllList();
         if(!userExperiences.iterator().hasNext()){
             return new ResponseEntity<Iterable<UserExperience>>(HttpStatus.NO_CONTENT);// OR HttpStatus.NOT_FOUND
         }
@@ -58,6 +62,7 @@ public class UserExperienceController {
 
     //------------------- Update a UserExperience --------------------------------------------------------
 
+    @CrossOrigin(origins = "http://localhost:53830")
     @RequestMapping(value = "/userExperience/{id}", method = RequestMethod.PUT)
     public ResponseEntity<UserExperience> updateUserExperience(@PathVariable("id") String id, @RequestBody UserExperience userExperience) {
 
@@ -75,6 +80,7 @@ public class UserExperienceController {
 
     //------------------- Delete a UserExperience --------------------------------------------------------
 
+    @CrossOrigin(origins = "http://localhost:53830")
     @RequestMapping(value = "/userExperience/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<UserExperience> deleteUserExperience(@PathVariable("id") String id) {
         UserExperience userExperience = userExperienceService.readById(id);

@@ -25,7 +25,8 @@ public class FitnessBioController {
 
     //-------------------Create a FitnessBio--------------------------------------------------------
 
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin(origins = "http://localhost:53830")
+    @RequestMapping(value = "/AddFitnessBio", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<FitnessBio> createFitnessBio(@RequestBody FitnessBio fitnessBio, UriComponentsBuilder ucBuilder) {
         fitnessBioService.create(fitnessBio);
         HttpHeaders headers = new HttpHeaders();
@@ -34,6 +35,8 @@ public class FitnessBioController {
     }
 
     //-------------------Retrieve Single FitnessBio--------------------------------------------------------
+
+    @CrossOrigin(origins = "http://localhost:53830")
     @RequestMapping(value = "/fitnessBio/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<FitnessBio> getFitnessBio(@PathVariable("id") String id) {
         FitnessBio fitnessBio = fitnessBioService.readById(id);
@@ -46,9 +49,10 @@ public class FitnessBioController {
 
     //-------------------Retrieve All FitnessBio--------------------------------------------------------
 
+    @CrossOrigin(origins = "http://localhost:53830")
     @RequestMapping(value = "/fitnessBio/AllFitnessBio", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Iterable<FitnessBio>> getFitnessBio() {
-        Iterable<FitnessBio> fitnessBios = fitnessBioService.readAll();
+        Iterable<FitnessBio> fitnessBios = fitnessBioService.readAllList();
         if(!fitnessBios.iterator().hasNext()){
             return new ResponseEntity<Iterable<FitnessBio>>(HttpStatus.NO_CONTENT);// OR HttpStatus.NOT_FOUND
         }
@@ -57,6 +61,7 @@ public class FitnessBioController {
 
     //------------------- Update a FitnessBio --------------------------------------------------------
 
+    @CrossOrigin(origins = "http://localhost:53830")
     @RequestMapping(value = "/fitnessBio/{id}", method = RequestMethod.PUT)
     public ResponseEntity<FitnessBio> updateFitnessBio(@PathVariable("id") String id, @RequestBody FitnessBio fitnessBio) {
 
@@ -78,6 +83,7 @@ public class FitnessBioController {
 
     //------------------- Delete a FitnessBio --------------------------------------------------------
 
+    @CrossOrigin(origins = "http://localhost:53830")
     @RequestMapping(value = "/fitnessBio/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<FitnessBio> deleteFitnessBio(@PathVariable("id") String id) {
         FitnessBio fitnessBio = fitnessBioService.readById(id);

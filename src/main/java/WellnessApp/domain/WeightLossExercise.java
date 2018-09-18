@@ -42,11 +42,11 @@ public class WeightLossExercise implements Serializable, Comparable<WeightLossEx
     }
 
     public WeightLossExercise(Builder builder) {
-        this.id = id;
-        this.weightLossExercise_Name = weightLossExercise_Name;
-        this.weightLossExercise_Amount = weightLossExercise_Amount;
-        this.weightLossExercise_Reps = weightLossExercise_Reps;
-        this.weightLossExercise_Date = weightLossExercise_Date;
+        this.id = builder.id;
+        this.weightLossExercise_Name = builder.weightLossExercise_Name;
+        this.weightLossExercise_Amount = builder.weightLossExercise_Amount;
+        this.weightLossExercise_Reps = builder.weightLossExercise_Reps;
+        this.weightLossExercise_Date = builder.weightLossExercise_Date;
     }
 
     public static class Builder{

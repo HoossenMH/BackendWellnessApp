@@ -25,7 +25,8 @@ public class WeightLossExerciseController {
 
     //-------------------Create a WeightLossExercise--------------------------------------------------------
 
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin(origins = "http://localhost:53830")
+    @RequestMapping(value = "/AddWeightLossExercise", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<WeightLossExercise> createWeightLossExercise(@RequestBody WeightLossExercise weightLossExercise, UriComponentsBuilder ucBuilder) {
         weightLossExerciseService.create(weightLossExercise);
         HttpHeaders headers = new HttpHeaders();
@@ -34,6 +35,8 @@ public class WeightLossExerciseController {
     }
 
     //-------------------Retrieve Single WeightLossExercise--------------------------------------------------------
+
+    @CrossOrigin(origins = "http://localhost:53830")
     @RequestMapping(value = "/weightLossExercise/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<WeightLossExercise> getWeightLossExercise(@PathVariable("id") String id) {
         WeightLossExercise weightLossExercise = weightLossExerciseService.readById(id);
@@ -46,9 +49,10 @@ public class WeightLossExerciseController {
 
     //-------------------Retrieve All WeightLossExercise--------------------------------------------------------
 
+    @CrossOrigin(origins = "http://localhost:53830")
     @RequestMapping(value = "/weightLossExercise/AllWeightLossExercise", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Iterable<WeightLossExercise>> getWeightLossExercise() {
-        Iterable<WeightLossExercise> weightLossExercises = weightLossExerciseService.readAll();
+        Iterable<WeightLossExercise> weightLossExercises = weightLossExerciseService.readAllList();
         if(!weightLossExercises.iterator().hasNext()){
             return new ResponseEntity<Iterable<WeightLossExercise>>(HttpStatus.NO_CONTENT);// OR HttpStatus.NOT_FOUND
         }
@@ -57,6 +61,7 @@ public class WeightLossExerciseController {
 
     //------------------- Update a WeightLossExercise --------------------------------------------------------
 
+    @CrossOrigin(origins = "http://localhost:53830")
     @RequestMapping(value = "/weightLossExercise/{id}", method = RequestMethod.PUT)
     public ResponseEntity<WeightLossExercise> updateWeightLossExercise(@PathVariable("id") String id, @RequestBody WeightLossExercise weightLossExercise) {
 
@@ -77,6 +82,7 @@ public class WeightLossExerciseController {
 
     //------------------- Delete a WeightLossExercise --------------------------------------------------------
 
+    @CrossOrigin(origins = "http://localhost:53830")
     @RequestMapping(value = "/weightLossExercise/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<WeightLossExercise> deleteWeightLossExercise(@PathVariable("id") String id) {
         WeightLossExercise weightLossExercise = weightLossExerciseService.readById(id);

@@ -26,7 +26,8 @@ public class SignUpController {
 
     //-------------------Create a SignUp--------------------------------------------------------
 
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin(origins = "http://localhost:53830")
+    @RequestMapping(value = "/AddSignUp", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<SignUp> createSignUp(@RequestBody SignUp signUp, UriComponentsBuilder ucBuilder) {
         signUpService.create(signUp);
         HttpHeaders headers = new HttpHeaders();
@@ -35,6 +36,8 @@ public class SignUpController {
     }
 
     //-------------------Retrieve Single SignUp--------------------------------------------------------
+
+    @CrossOrigin(origins = "http://localhost:53830")
     @RequestMapping(value = "/signUp/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<SignUp> getSignUp(@PathVariable("id") String id) {
         SignUp signUp = signUpService.readById(id);
@@ -47,6 +50,7 @@ public class SignUpController {
 
     //-------------------Retrieve All SignUp--------------------------------------------------------
 
+    @CrossOrigin(origins = "http://localhost:53830")
     @RequestMapping(value = "/signUp/AllSignUp", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Iterable<SignUp>> getSignUp() {
         Iterable<SignUp> signUps = signUpService.readAllList();
@@ -58,6 +62,7 @@ public class SignUpController {
 
     //------------------- Update a SignUp --------------------------------------------------------
 
+    @CrossOrigin(origins = "http://localhost:53830")
     @RequestMapping(value = "/signUp/{id}", method = RequestMethod.PUT)
     public ResponseEntity<SignUp> updateSignUp(@PathVariable("id") String id, @RequestBody SignUp signUp) {
 
@@ -80,6 +85,7 @@ public class SignUpController {
 
     //------------------- Delete a SignUp --------------------------------------------------------
 
+    @CrossOrigin(origins = "http://localhost:53830")
     @RequestMapping(value = "/signUp/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<SignUp> deleteSignUp(@PathVariable("id") String id) {
         SignUp signUp = signUpService.readById(id);

@@ -18,7 +18,7 @@ public class FitnessBio implements Serializable, Comparable<FitnessBio>  {
     private String reasons;
     private double weight;
     private double height;
-    private double BMI = weight / (height*height);
+    private double BMI;
     private String bloodPressure;
 
     private FitnessBio() {
@@ -61,7 +61,7 @@ public class FitnessBio implements Serializable, Comparable<FitnessBio>  {
         private String reasons;
         private double weight;
         private double height;
-        private double BMI = weight / (height*height);
+        private double BMI;
         private String bloodPressure;
 
         public Builder id(String id) {
